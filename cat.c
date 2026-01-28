@@ -3,6 +3,7 @@
 
 #define ui32 unsigned int
 #define CAT_READ_ERROR  "cat: error reading file\n"
+#define BUFF_SIZE 4096
 
 ui32  slen(char *s)
 {
@@ -16,15 +17,15 @@ ui32  slen(char *s)
 
 int cat(int fd)
 {
-  unsigned char  buff[4096];
-  int   bytes;
+  unsigned char  buff[BUFF_SIZE];
+  int            bytes;
 
   if (fd < 0)
     return (-1);
   bytes = 1;
   while (bytes)
   {
-    bytes = read(fd, buff, 4096);
+    bytes = read(fd, buff, BUFF_SIZE);
     if (bytes == -1)
       return (-1);
     write(1, buff, bytes); 
